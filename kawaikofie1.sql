@@ -16,41 +16,6 @@
 CREATE DATABASE IF NOT EXISTS `kawaikofie` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `kawaikofie`;
 
--- Dumping structure for table kawaikofie.detail_pesanan
-CREATE TABLE IF NOT EXISTS `detail_pesanan` (
-  `id_pemesanan` int(11) DEFAULT NULL,
-  `id_menu` int(11) DEFAULT NULL,
-  `jumlah` int(11) DEFAULT NULL,
-  KEY `FK_item_pembelian_jenis_menu` (`id_menu`),
-  KEY `FK_item_pembelian_pembelian` (`id_pemesanan`) USING BTREE,
-  CONSTRAINT `FK_detail_pesanan_pemesanan` FOREIGN KEY (`id_pemesanan`) REFERENCES `pemesanan` (`id_pemesanan`) ON UPDATE CASCADE,
-  CONSTRAINT `FK_item_pembelian_jenis_menu` FOREIGN KEY (`id_menu`) REFERENCES `jenis_menu` (`id_jenis`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Dumping data for table kawaikofie.detail_pesanan: ~5 rows (approximately)
-/*!40000 ALTER TABLE `detail_pesanan` DISABLE KEYS */;
-REPLACE INTO `detail_pesanan` (`id_pemesanan`, `id_menu`, `jumlah`) VALUES
-	(1, 1, 2),
-	(1, 6, 2),
-	(2, 5, 4),
-	(3, 2, 6),
-	(2, 3, 3);
-/*!40000 ALTER TABLE `detail_pesanan` ENABLE KEYS */;
-
--- Dumping structure for table kawaikofie.item_pemesanan
-CREATE TABLE IF NOT EXISTS `item_pemesanan` (
-  `id_pemesanan` int(11) DEFAULT NULL,
-  `id_menu` int(11) DEFAULT NULL,
-  `jumlah` int(11) DEFAULT NULL,
-  KEY `id_pemesanan` (`id_pemesanan`),
-  KEY `id_menu` (`id_menu`),
-  CONSTRAINT `FK_item_pemesanan_menu` FOREIGN KEY (`id_menu`) REFERENCES `menu` (`id_menu`) ON UPDATE CASCADE,
-  CONSTRAINT `FK_item_pemesanan_pemesanan` FOREIGN KEY (`id_pemesanan`) REFERENCES `pemesanan` (`id_pemesanan`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Dumping data for table kawaikofie.item_pemesanan: ~0 rows (approximately)
-/*!40000 ALTER TABLE `item_pemesanan` DISABLE KEYS */;
-/*!40000 ALTER TABLE `item_pemesanan` ENABLE KEYS */;
 
 -- Dumping structure for table kawaikofie.jenis_menu
 CREATE TABLE IF NOT EXISTS `jenis_menu` (
@@ -138,6 +103,29 @@ REPLACE INTO `pemesanan` (`id_pemesanan`, `no_meja`, `tgl_beli`, `id_kasir`, `id
 	(2, 5, '2022-06-24 10:09:04', NULL, NULL),
 	(3, 1, '2022-06-24 10:09:17', NULL, NULL);
 /*!40000 ALTER TABLE `pemesanan` ENABLE KEYS */;
+
+
+-- Dumping structure for table kawaikofie.detail_pesanan
+CREATE TABLE IF NOT EXISTS `detail_pesanan` (
+  `id_pemesanan` int(11) DEFAULT NULL,
+  `id_menu` int(11) DEFAULT NULL,
+  `jumlah` int(11) DEFAULT NULL,
+  KEY `FK_item_pembelian_jenis_menu` (`id_menu`),
+  KEY `FK_item_pembelian_pembelian` (`id_pemesanan`) USING BTREE,
+  CONSTRAINT `FK_detail_pesanan_pemesanan` FOREIGN KEY (`id_pemesanan`) REFERENCES `pemesanan` (`id_pemesanan`) ON UPDATE CASCADE,
+  CONSTRAINT `FK_item_pembelian_jenis_menu` FOREIGN KEY (`id_menu`) REFERENCES `jenis_menu` (`id_jenis`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dumping data for table kawaikofie.detail_pesanan: ~5 rows (approximately)
+/*!40000 ALTER TABLE `detail_pesanan` DISABLE KEYS */;
+REPLACE INTO `detail_pesanan` (`id_pemesanan`, `id_menu`, `jumlah`) VALUES
+	(1, 1, 2),
+	(1, 6, 2),
+	(2, 5, 4),
+	(3, 2, 6),
+	(2, 3, 3);
+/*!40000 ALTER TABLE `detail_pesanan` ENABLE KEYS */;
+
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
